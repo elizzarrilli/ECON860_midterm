@@ -16,9 +16,6 @@ file = open(file_name, "r")
 soup = BeautifulSoup(file.read(), 'html.parser')
 file.close()
 
-#text = soup.get_text()
-#print(text)
-
 user_list = soup.find_all("div", {"class": "grid grid-cols-4 gap-4"})
 #print(user_list)
 
@@ -38,10 +35,10 @@ for user in user_list:
 			"Login ID": ghid,
 			"Repo Count": repo,
 			"Follower Count": followers,
+			"Member Since": date
 			}])
 		])
 
-#print(dataset)
 dataset.to_csv("parsed_files/dataset.csv", index=False)
 
 
