@@ -1,31 +1,28 @@
+import json
 import pandas
 import os
-import re
 import glob
-
-from bs4 import BeautifulSoup
+import re
 
 if not os.path.exists("parsed_files"):
 	os.mkdir("parsed_files")
 
 dataset = pandas.DataFrame()
 
-for file_name in glob.glob("html_files2/*.html"):
+for json_file_name in glob.glob("json_files2/*.json"):
 
-	file = open(file_name, "r")
-	soup = BeautifulSoup(file.read(), 'html.parser')
-	file.close()
+	f = open(json_file_name, "r")
+	json_data = json.load(f)
 
-	star_list = soup.find_all("div", {"class": "d-inline-block mb-1"})
-
-	num_starred = len(star_list)
-	print(num_starred)
+	num_starred = len(json_data)
 
 	row = pandas.DataFrame.from_records([{
-		'Login ID': file_name.replace("html_files2/","").replace(".html",""),
+		'ghid': json_file_name.replace("json_files2/","").replace(".json",""),
 		'num_starred': num_starred
 		}])
 
 	dataset = pandas.concat([dataset,row])
 
 print(dataset)
+print(len(dataset))
+dataset.to_csv("parsed_files/num_starred_data.csv", index = False)
