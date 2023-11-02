@@ -2,7 +2,6 @@ import pandas
 import numpy as np
 import re
 import matplotlib.pyplot as plt
-import numpy as np
 
 ghids = pandas.read_csv("parsed_files/github_data.csv")
 
