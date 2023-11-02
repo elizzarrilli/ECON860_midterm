@@ -2,22 +2,23 @@ import pandas
 
 ### Charcoal Papers data ##########################################################
 
-dataset = pandas.read_csv("parsed_files/dataset.csv")
+data = pandas.read_csv("parsed_files/dataset.csv")
 bonus = pandas.read_csv("parsed_files/bonus_dataset.csv")
 
 ##remove duplicates
 bonus = bonus.drop_duplicates()
-dataset = dataset.drop_duplicates()
+dataset = data.drop_duplicates()
 
 all_ids = pandas.concat([dataset, bonus])
 
+print("Sample size: ", len(data))
 print("total number of users: ", len(all_ids))
 print("number of unique static ids: ", len(dataset))
 print("number of unique bonus ids: ", len(bonus))
 
 dataset.to_csv("parsed_files/cleaned_dataset.csv", index=False)
-dataset.to_csv("parsed_files/cleaned_bonus.csv", index=False)
-dataset.to_csv("parsed_files/all_ids.csv", index=False)
+bonus.to_csv("parsed_files/cleaned_bonus.csv", index=False)
+all_ids.to_csv("parsed_files/all_ids.csv", index=False)
 
 ### Github data ##################################################################
 

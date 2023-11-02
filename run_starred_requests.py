@@ -9,7 +9,7 @@ if not os.path.exists("html_files2"):
 
 access_point = "https://github.com"
 
-id_list = pandas.read_csv("parsed_files/all_ids.csv")
+id_list = pandas.read_csv("parsed_files/cleaned_dataset.csv")
 id_list = id_list['Login ID']
 
 headers = {

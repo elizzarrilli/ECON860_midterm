@@ -35,7 +35,7 @@ for user in user_list:
 			"Login ID": ghid,
 			"Repo Count": repo,
 			"Follower Count": followers,
-			"Member Since": date
+			"Member Since": date.replace("-","")
 			}])
 		])
 

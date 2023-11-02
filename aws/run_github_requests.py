@@ -13,7 +13,7 @@ f = open("token", "r")
 token = f.read()
 f.close
 
-id_list = pandas.read_csv("parsed_files/all_ids.csv")
+id_list = pandas.read_csv("parsed_files/cleaned_dataset.csv")
 id_list = id_list['Login ID']
 
 github_session = requests.Session()

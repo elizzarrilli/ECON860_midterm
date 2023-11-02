@@ -24,6 +24,7 @@ for json_file_name in glob.glob("json_files/*.json"):
 		ghid = json_data['login']
 		avatar_url = json_data['avatar_url']
 		url = json_data['url']
+		followers = json_data['followers']
 		following = json_data['following']
 		starred_url = json_data['starred_url']
 		full_name = json_data['name']
@@ -33,13 +34,16 @@ for json_file_name in glob.glob("json_files/*.json"):
 		email = json_data['email']
 		hireable = json_data['hireable']
 		bio = json_data['bio']
-		start_time = json_data['created_at']
-		update_time = json_data['updated_at']
+		start_time = json_data['created_at'].split("T")[0]
+		update_time = json_data['updated_at'].split("T")[0]
+		admin = json_data['site_admin']
+		num_repos = json_data['public_repos']
 
 		row = pandas.DataFrame.from_records([{
 			'ghid': ghid,
 			'avatar_url':avatar_url,
 			'url':url,
+			'num_followers': followers,
 			'num_following':following,
 			'full_name':full_name,
 			'company':company,
@@ -48,9 +52,11 @@ for json_file_name in glob.glob("json_files/*.json"):
 			'email':email,
 			'hireable':hireable,
 			'bio':bio,
-			'start_time':start_time,
-			'update_time':update_time,
-			'starred_url': starred_url
+			'start_time':start_time.replace("-",""),
+			'update_time':update_time.replace("-",""),
+			'starred_url': starred_url,
+			'admin': admin,
+			'num_repos':num_repos
 			}])
 
 		dataset = pandas.concat([dataset,row])
